@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f8f7ff" />
+  <meta name="description" content="Free, private file tools that run in your browser." />
+  <title>FileFlow — files, made simple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="vendor/pdf-lib.min.js" defer></script>
+  <script src="vendor/pdf.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+  <script src="vendor/jszip.min.js" defer></script>
+  <script src="vendor/pdfmake.min.js" defer></script>
+  <script src="vendor/vfs_fonts.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="FileFlow home"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 4h10l7 7v16H8z"/><path d="M18 4v8h7M12 17h9M12 21h9"/></svg></span><span>fileflow<span class="brand-dot">.</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation"><a href="#tools">All tools</a><a href="#how">How it works</a><a href="#privacy">Privacy</a></nav>
+    <a class="nav-cta" href="#tools">Explore tools <span>↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR FILES, YOUR WAY</div>
+        <h1>Make files<br><span>flow.</span></h1>
+        <p class="hero-lede">The little file tools that make a big difference. Convert, organize and polish your files in a few clicks.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#tools">Find a tool <span>↓</span></a><div class="hero-proof"><div class="avatar-stack"><i>✳</i><i>↗</i><i>✓</i></div><span>Free to use. No account needed.</span></div></div>
+        <div class="hero-note"><span class="sparkle">✦</span> Files stay on your device while you work.</div>
+      </div>
+      <div class="hero-art" aria-label="A file being transformed into useful formats">
+        <div class="art-glow"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="floating-tag tag-pdf"><span class="mini-file red">PDF</span><b>your-file.pdf</b><small>2.4 MB</small></div>
+        <div class="floating-tag tag-image"><span class="mini-file green">IMG</span><b>image.webp</b><small>Ready to go</small></div>
+        <div class="main-file"><div class="file-fold"></div><div class="file-lines"><i></i><i></i><i></i></div><div class="file-stamp">✦</div><span class="file-label">YOUR FILE</span></div>
+        <div class="flow-arrow">↗</div><div class="art-caption">A little magic.<br><b>Zero hassle.</b></div><div class="tiny-spark spark-a">✦</div><div class="tiny-spark spark-b">✳</div>
+      </div>
+    </section>
+
+    <section class="tool-section wrap" id="tools">
+      <div class="section-head"><div><div class="eyebrow">THE TOOLBOX</div><h2>What can we help with?</h2><p>Pick a tool, drop in a file, and you’re on your way.</p></div><label class="search-box"><span>⌕</span><input id="toolSearch" type="search" placeholder="Search a tool..." aria-label="Search tools"><kbd>⌘ K</kbd></label></div>
+      <div class="category-row"><button class="filter active" data-filter="all">All workflows</button><button class="filter" data-filter="organize">Organize PDF</button><button class="filter" data-filter="optimize">Optimize PDF</button><button class="filter" data-filter="convert">Convert PDF</button><button class="filter" data-filter="edit">Edit PDF</button><button class="filter" data-filter="security">PDF Security</button><button class="filter" data-filter="intelligence">PDF Intelligence</button><div class="category-line"></div><span class="browser-badge"><span>●</span> Runs in your browser</span></div>
+      <div class="tools-grid" id="toolGrid">
+        <button class="tool-card" data-kind="image" data-group="convert" data-tool="convert-image"><span class="card-icon lilac">▧</span><span class="card-arrow">↗</span><strong>Convert image</strong><span class="card-desc">JPG, PNG, WEBP and more</span><span class="card-meta">IMAGE <i>·</i> 1 FILE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="organize" data-tool="merge-pdf"><span class="card-icon peach">▤</span><span class="card-arrow">↗</span><strong>Merge PDF</strong><span class="card-desc">Bring documents together</span><span class="card-meta">PDF <i>·</i> MULTIPLE FILES</span></button>
+        <button class="tool-card" data-kind="image" data-group="convert" data-tool="resize-image"><span class="card-icon mint">⤢</span><span class="card-arrow">↗</span><strong>Resize image</strong><span class="card-desc">Get the dimensions just right</span><span class="card-meta">IMAGE <i>·</i> 1 FILE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="organize" data-tool="split-pdf"><span class="card-icon sky">⫶</span><span class="card-arrow">↗</span><strong>Split PDF</strong><span class="card-desc">Keep only the pages you need</span><span class="card-meta">PDF <i>·</i> 1 FILE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="image-to-pdf"><span class="card-icon yellow">▧</span><span class="card-arrow">↗</span><strong>Image to PDF</strong><span class="card-desc">Turn pictures into a document</span><span class="card-meta">PDF <i>·</i> MULTIPLE FILES</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="pdf-to-images"><span class="card-icon rose">▣</span><span class="card-arrow">↗</span><strong>PDF to images</strong><span class="card-desc">Save pages as PNG images</span><span class="card-meta">PDF <i>·</i> 1 FILE</span></button>
+        <button class="tool-card" data-kind="image" data-group="optimize" data-tool="compress-image"><span class="card-icon mint">◒</span><span class="card-arrow">↗</span><strong>Compress image</strong><span class="card-desc">Smaller file, lovely quality</span><span class="card-meta">IMAGE <i>·</i> 1 FILE</span></button>
+        <button class="tool-card" data-kind="image" data-group="edit" data-tool="rotate-image"><span class="card-icon lilac">⟳</span><span class="card-arrow">↗</span><strong>Rotate image</strong><span class="card-desc">Turn it until it feels right</span><span class="card-meta">IMAGE <i>·</i> 1 FILE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="organize" data-tool="rotate-pdf"><span class="card-icon sky">⟳</span><span class="card-arrow">↗</span><strong>Rotate PDF</strong><span class="card-desc">Rotate every page in your document</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="organize" data-tool="organize-pdf"><span class="card-icon lilac">☷</span><span class="card-arrow">↗</span><strong>Organize PDF</strong><span class="card-desc">Reorder, remove or duplicate pages</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="optimize" data-tool="watermark-pdf"><span class="card-icon peach">◩</span><span class="card-arrow">↗</span><strong>Watermark</strong><span class="card-desc">Stamp text on every page</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="optimize" data-tool="compress-pdf"><span class="card-icon mint">◒</span><span class="card-arrow">↗</span><strong>Compress PDF</strong><span class="card-desc">Reduce size with adjustable image quality</span><span class="card-meta">PDF <i>·</i> RASTER COPY</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="edit" data-tool="page-numbers"><span class="card-icon yellow">№</span><span class="card-arrow">↗</span><strong>Page numbers</strong><span class="card-desc">Number pages in your document</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="edit" data-tool="edit-pdf"><span class="card-icon mint">✎</span><span class="card-arrow">↗</span><strong>Edit PDF</strong><span class="card-desc">Add a text note to page one</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="edit" data-tool="crop-pdf"><span class="card-icon rose">▣</span><span class="card-arrow">↗</span><strong>Crop PDF</strong><span class="card-desc">Trim page margins</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="edit" data-tool="pdf-forms"><span class="card-icon sky">☑</span><span class="card-arrow">↗</span><strong>PDF Forms</strong><span class="card-desc">Add a fillable text field</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="security" data-tool="sign-pdf"><span class="card-icon lilac">✒</span><span class="card-arrow">↗</span><strong>Sign PDF</strong><span class="card-desc">Add a typed signature</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="organize" data-tool="repair-pdf"><span class="card-icon mint">↻</span><span class="card-arrow">↗</span><strong>Repair PDF</strong><span class="card-desc">Try to rewrite a damaged PDF</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="organize" data-tool="compare-pdf"><span class="card-icon yellow">⇄</span><span class="card-arrow">↗</span><strong>Compare PDF</strong><span class="card-desc">Compare text from two PDFs</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="intelligence" data-tool="ocr-pdf"><span class="card-icon peach">Aa</span><span class="card-arrow">↗</span><strong>OCR PDF</strong><span class="card-desc">Recognize text in scanned pages</span><span class="card-meta">PDF <i>·</i> NEEDS INTERNET</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="pdf-word"><span class="card-icon sky">W</span><span class="card-arrow">↗</span><strong>PDF to Word</strong><span class="card-desc">Export extracted text for editing</span><span class="card-meta">PDF <i>·</i> TEXT LAYER</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="pdf-markdown"><span class="card-icon lilac">MD</span><span class="card-arrow">↗</span><strong>PDF to Markdown</strong><span class="card-desc">Extract text into a Markdown file</span><span class="card-meta">PDF <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="pdf-ppt"><span class="card-icon peach">P</span><span class="card-arrow">↗</span><strong>PDF to PowerPoint</strong><span class="card-desc">Editable slide conversion</span><span class="card-meta">PDF <i>·</i> ADVANCED ENGINE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="pdf-excel"><span class="card-icon mint">X</span><span class="card-arrow">↗</span><strong>PDF to Excel</strong><span class="card-desc">Extract tables into spreadsheets</span><span class="card-meta">PDF <i>·</i> ADVANCED ENGINE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="word-pdf"><span class="card-icon sky">W</span><span class="card-arrow">↗</span><strong>Word to PDF</strong><span class="card-desc">Convert DOC and DOCX documents</span><span class="card-meta">DOCX <i>·</i> ADVANCED ENGINE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="ppt-pdf"><span class="card-icon peach">P</span><span class="card-arrow">↗</span><strong>PowerPoint to PDF</strong><span class="card-desc">Convert PPT and PPTX slides</span><span class="card-meta">PPTX <i>·</i> ADVANCED ENGINE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="excel-pdf"><span class="card-icon mint">X</span><span class="card-arrow">↗</span><strong>Excel to PDF</strong><span class="card-desc">Convert XLS and XLSX workbooks</span><span class="card-meta">XLSX <i>·</i> ADVANCED ENGINE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="pdf-a"><span class="card-icon rose">A</span><span class="card-arrow">↗</span><strong>PDF to PDF/A</strong><span class="card-desc">Prepare a long-term archive copy</span><span class="card-meta">PDF <i>·</i> ADVANCED ENGINE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="security" data-tool="protect-pdf"><span class="card-icon rose">♙</span><span class="card-arrow">↗</span><strong>Protect PDF</strong><span class="card-desc">Set an opening password for your document</span><span class="card-meta">PDF <i>·</i> LOCAL RASTER COPY</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="security" data-tool="unlock-pdf"><span class="card-icon yellow">♧</span><span class="card-arrow">↗</span><strong>Unlock PDF</strong><span class="card-desc">Open and rebuild a PDF you own</span><span class="card-meta">PDF <i>·</i> LOCAL RASTER COPY</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="security" data-tool="redact-pdf"><span class="card-icon rose">▰</span><span class="card-arrow">↗</span><strong>Redact PDF</strong><span class="card-desc">Permanent redaction needs verification</span><span class="card-meta">PDF <i>·</i> ADVANCED ENGINE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="intelligence" data-tool="summarize-pdf"><span class="card-icon lilac">✦</span><span class="card-arrow">↗</span><strong>AI Summarizer</strong><span class="card-desc">Summarize document key points</span><span class="card-meta">PDF <i>·</i> AI SERVICE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="intelligence" data-tool="translate-pdf"><span class="card-icon sky">文</span><span class="card-arrow">↗</span><strong>Translate PDF</strong><span class="card-desc">Translate while preserving layout</span><span class="card-meta">PDF <i>·</i> AI SERVICE</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="convert" data-tool="html-pdf"><span class="card-icon yellow">&lt;/&gt;</span><span class="card-arrow">↗</span><strong>HTML to PDF</strong><span class="card-desc">Prepare HTML for printing to PDF</span><span class="card-meta">HTML <i>·</i> PRINT DIALOG</span></button>
+        <button class="tool-card" data-kind="image" data-group="convert" data-tool="scan-pdf"><span class="card-icon mint">▣</span><span class="card-arrow">↗</span><strong>Scan to PDF</strong><span class="card-desc">Combine camera scans into a PDF</span><span class="card-meta">IMAGE <i>·</i> LOCAL</span></button>
+        <button class="tool-card" data-kind="pdf" data-group="workflow" data-tool="workflow"><span class="card-icon lilac">⌘</span><span class="card-arrow">↗</span><strong>Create a workflow</strong><span class="card-desc">Chain favorite tools into a reusable flow</span><span class="card-meta">WORKFLOW <i>·</i> BETA</span></button>
+      </div>
+      <p class="no-results" id="noResults" hidden>No tools found. Try another search.</p>
+    </section>
+
+    <section class="privacy-band wrap" id="privacy"><div class="privacy-icon">♡</div><div><strong>A little more peace of mind.</strong><p>Your files are processed right here in your browser. They aren’t uploaded or stored on a server.</p></div><a href="#how">How we keep it private <span>↗</span></a></section>
+    <section class="how wrap" id="how"><div><div class="eyebrow">NICE AND SIMPLE</div><h2>Three steps.<br>Back to your day.</h2></div><div class="steps"><div class="step"><span>01</span><b>Choose a tool</b><p>Find the file helper that fits what you need.</p></div><div class="step"><span>02</span><b>Add your files</b><p>Drop them in. They stay on your device.</p></div><div class="step"><span>03</span><b>Download and go</b><p>Your finished file is ready in a moment.</p></div></div></section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><a class="brand" href="#top"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 4h10l7 7v16H8z"/><path d="M18 4v8h7M12 17h9M12 21h9"/></svg></span><span>fileflow<span class="brand-dot">.</span></span></a><span>Made for the little things that make work easier.</span><span>© 2026 FileFlow</span></div></footer>
+
+  <main class="tool-route" id="toolRoute" hidden>
+    <div class="tool-route-nav"><button class="route-back" id="backTools" type="button"><span>←</span> All tools</button><div class="route-brand"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 4h10l7 7v16H8z"/><path d="M18 4v8h7M12 17h9M12 21h9"/></svg></span> fileflow<span class="brand-dot">.</span></div><div class="route-privacy"><span>●</span> Files stay on your device</div></div>
+    <div class="tool-route-content">
+      <header class="tool-heading"><div class="eyebrow" id="modalCategory">IMAGE TOOL</div><h1 id="modalTitle">Convert image</h1><p id="modalDescription">Choose a file to get started.</p></header>
+      <div class="tool-workspace">
+        <section class="tool-controls" aria-label="Tool settings">
+          <div class="workspace-step"><span>01</span><b>Add your files</b></div>
+          <label class="drop-zone" id="dropZone"><input id="fileInput" type="file" hidden><span class="upload-icon">↑</span><b>Drop files here or <u>browse</u></b><small id="fileHint">Your files stay on this device</small></label>
+          <button type="button" class="add-more-files" id="addFilesButton" hidden><span>+</span> Add files</button>
+          <div id="fileList" class="file-list"></div>
+          <section id="sourcePreview" class="source-preview" hidden><div><b>Selected image</b><small id="sourceDimensions"></small></div><img id="sourceImage" alt="Selected source image preview"></section>
+          <div class="workspace-step options-step"><span>02</span><b>Adjust settings</b></div>
+          <div class="options" id="options"></div>
+          <div class="status" id="status" role="status"></div>
+          <div class="workspace-actions"><button class="button button-quiet" id="clearFiles" type="button">Clear files</button><button class="button button-primary" id="runTool" disabled type="button">Choose files <span>→</span></button></div>
+          <p class="privacy-foot">🔒 Processed locally in your browser</p>
+        </section>
+        <section class="tool-preview-column" aria-label="Result preview">
+          <div class="workspace-step"><span>03</span><b>Preview and download</b></div>
+          <div class="preview-placeholder" id="previewPlaceholder"><span>▧</span><b>Your finished file will appear here</b><small>Review the result before downloading it.</small></div>
+          <section class="result-panel" id="resultPanel" hidden><div class="result-head"><div><b>Preview your result</b><small id="resultName"></small></div><button class="button button-primary" id="downloadResult" type="button">Download <span>↓</span></button></div><div class="preview-content" id="previewContent"></div></section>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
